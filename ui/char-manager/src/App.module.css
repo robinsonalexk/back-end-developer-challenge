@@ -1,0 +1,16 @@
+.header {
+    background-color: #3d5e99;
+    color: #fff;
+    padding-left: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main {
+    margin: auto;
+    padding: 1em;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}

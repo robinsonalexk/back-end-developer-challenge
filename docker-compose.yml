@@ -1,0 +1,42 @@
+services:
+  mongo:
+    image: mongo:7
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: charmanagerdb
+    volumes:
+      - mongo_data:/data/db
+      - ./db:/docker-entrypoint-initdb.d:ro
+    ports:
+      - "27017:27017"
+
+  api:
+    build: ./api
+    restart: unless-stopped
+    depends_on:
+      - mongo
+    environment:
+      MongoDB__ConnectionString: mongodb://admin:password@mongo:27017
+      MongoDB__DatabaseName: charmanagerdb
+      Cors__AllowedOrigin: http://localhost:5050
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: 5000
+    ports:
+      - "5000:5000"
+      
+
+  web:
+    build: 
+      context: ./ui
+      args:
+        VITE_API_URL: http://localhost:5000
+    restart: unless-stopped
+    depends_on:
+      - api
+    ports:
+      - "5050:5050"
+
+volumes:
+  mongo_data:

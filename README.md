@@ -1,3 +1,9 @@
+
+# DDB Back End Developer Challenge
+
+<details>
+<summary> Project Description </summary>
+
 # DDB Back End Developer Challenge
 
 ### Overview
@@ -85,3 +91,50 @@ Requirements for the UI:
 - CSS Modules for styling
 - Must work on large and small screens
 - Accessibility: should be navigable by keyboard and include proper labels for screen reading software
+
+</details>
+
+## Stack Decision Points
+
+### MongoDB
+- Easy to spin up
+- Perfect for short projects such as this
+- Document storage aligns well with provided json file for data schaffolding
+- Based on given requirements, no need for relational behavior/Easily able to implement for this configuration if needed
+
+### Docker
+- Common way to standardize environment for others to pull down
+
+### C# w/ Websockets
+- Real time tracking for hypothetical multiple users on updates of the health
+
+### C# w/ REST
+- Initial data load makes more sense with an initial fetch
+- Following pattern of cascading updates via websockets after REST Update/Post
+
+### React w/ Redux
+- Great way to manage states with WS on the backend
+- Allows for cleaner async updates in the codebase
+
+## How to Run
+
+- Note: Is is expected to run this project through docker.
+- Additionally the following localhost ports are used: 27017, 5000, 5050
+
+After pulling the repository down, navigate to the root of the project and run the 
+
+```
+docker-compose up --build
+```
+
+To run C# tests navigate to the `char-manager-api-test` directory and run
+
+```
+dotnet test
+```
+
+To run vitests tests navigate to the `char-manager` directory and run
+
+```
+npm run test
+```

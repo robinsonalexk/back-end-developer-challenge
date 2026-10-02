@@ -1,0 +1,24 @@
+{
+  "name": "Ryu",
+  "level": 10,
+  "hitPoints": 80,
+  "classes": [
+    {
+    "name":"monk",
+    "hitDiceValue":8,
+    "classLevel":10
+    }
+  ],
+  "stats":{
+    "strength":18,
+    "dexterity":12,
+    "constitution":14,
+    "intelligence":10,
+    "wisdom":16,
+    "charisma":8
+  },
+  "items":[
+  ],
+  "defenses":[
+  ]
+}

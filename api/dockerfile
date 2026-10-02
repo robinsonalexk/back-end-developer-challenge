@@ -1,0 +1,20 @@
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+WORKDIR /src
+
+COPY ["char-manager-api/char-manager-api.csproj", "char-manager-api/"]
+RUN dotnet restore "char-manager-api/char-manager-api.csproj"
+
+COPY . .
+RUN dotnet publish "char-manager-api/char-manager-api.csproj" \
+    -c Release \
+    -o /app/publish
+
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS final
+
+WORKDIR /app
+
+COPY --from=build /app/publish .
+
+EXPOSE 5000
+
+ENTRYPOINT ["dotnet", "char-manager-api.dll"]

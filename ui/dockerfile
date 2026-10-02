@@ -1,0 +1,16 @@
+
+FROM node
+
+WORKDIR /app
+
+COPY /char-manager/package.json .
+RUN npm i
+
+COPY /char-manager/. .
+
+EXPOSE 5050
+
+ARG VITE_API_URL
+ENV VITE_API_URL=$VITE_API_URL
+
+CMD ["npm", "run", "dev"]
